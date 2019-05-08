@@ -1,0 +1,22 @@
+<launch>
+    <node pkg="ekf" type="ekf" name="ekf" output="screen">
+        <remap from="~imu" to="/dji_sdk_1/dji_sdk/imu"/>
+ 	<remap from="~tag_odom" to="/tag_detector/odom_yourwork"/>
+	<remap from="~optical_flow_odom" to="/opticalflow_node/opticalflow_odom"/>
+    </node>
+
+    
+    <node pkg="optical_flow" type="optical_flow" name="optical_flow" output="screen">
+        <remap from="~image_raw" to="/camera/image_raw"/>
+    </node>
+    
+
+    <node pkg="tag_detector" type="tag_detector" name="tag_detector" output="screen">
+        <remap from="~image_raw" to="/camera/image_raw"/>        
+	<param name="cam_cal_file" type="string" value="$(find tag_detector)/config/camera.yml"/>
+        <param name="board_config_file" type="string" value="$(find tag_detector)/config/mat_ekf.yml"/>
+    </node>
+
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find ekf)/rviz/demo.rviz" />
+
+</launch>

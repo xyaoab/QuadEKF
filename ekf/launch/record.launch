@@ -1,0 +1,7 @@
+<launch>
+    
+    <arg name="topics_name" default="/ekf/ekf_odom /uwb_vicon_odom" />
+
+    <node pkg="rosbag" type="record" name="ekf_record" args="-o /home/dji/ $(arg topics_name)" output="screen" />
+    <include file="$(find ekf)/launch/demo.launch" />
+</launch>

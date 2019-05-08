@@ -1,0 +1,7 @@
+<launch>
+    <node pkg="tag_detector" type="tag_detector" name="tag_detector" output="screen">
+        <remap from="~image_raw" to="/camera/image_raw"/>
+        <param name="cam_cal_file" type="string" value="$(find tag_detector)/config/camera.yml"/>
+        <param name="board_config_file" type="string" value="$(find tag_detector)/config/mat_ekf.yml"/>
+    </node>
+</launch>
